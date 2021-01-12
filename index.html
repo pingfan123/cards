@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding:0;
+    }
+    html,body {
+        width:100%;
+        height: 100%;
+        background-image: url("img/start.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+    body img {
+        width:100px;
+    }
+    #box {
+        width:100%;
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;perspective: 1000px;
+    }
+    #box1 {
+        width:80%;
+        height:30%;
+        background-color:rgba(255,255,255,0.2);
+        z-index: 3;
+    }
+    #box2 {
+        width:100%;
+        height:30%;
+        background-color: rgba(0,0,233,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        z-index: 2;
+
+    }
+    #st,#en {
+        width:400px;
+        overflow: hidden;
+        text-align: center;
+    }
+    #box3 {
+        width:80%;
+        height:30%;
+        background-color:rgba(255,255,255,0.2);
+        z-index: 0;
+    }
+    .come {
+        width:100px;
+        position: absolute;
+        left:900px;
+        top:400px;
+        transition: all 3s;
+        transform-style: preserve-3d;
+    }
+    .coe {
+        width:100px;
+        left:0;
+        top:0;
+        position: absolute;
+        transform: rotateY(180deg);
+    }
+    .com {
+        width:100px;
+        left:0;
+        top:0;
+        position: absolute;
+        transform: rotateY(0deg);
+    }
+    @keyframes reve {
+        0%{transform: rotateY(0deg)}
+        50%{transform: rotateY(90deg)}
+        100%{transform: rotateY(180deg)}
+    }
+    @keyframes revt {
+        0%{transform: rotateY(180deg)}
+        50%{transform: rotateY(90deg)}
+        100%{transform: rotateY(0deg)}
+    }
+    @keyframes rev {
+        0% {
+            transform: scale(1, 1) rotateY(0deg);
+        }
+        10% {
+            transform: scale(1, 1) rotateY(90deg);
+        }
+        20% {
+            transform: scale(1, 1) rotateY(180deg);
+        }
+        40% {
+            transform: scale(1, 1) rotateY(180deg);
+        }
+        50% {
+            transform: scale(1, 1) rotateY(90deg);
+        }
+        60% {
+            transform: scale(1, 1) rotateY(0deg);
+        }
+        70% {
+            transform: scale(0.5, 0.5);
+        }
+        80% {
+            transform: scale(0.2, 0.2);
+        }
+        90% {
+            transform: scale(0, 0);
+            visibility: hidden;
+        }
+        100% {
+            visibility: hidden;
+            transform: scale(1, 1)
+        }
+    }
+    @keyframes rei {
+        0% {
+            transform: scale(1,1) rotateY(180deg);
+        }
+        50% {
+            transform: scale(1,1) rotateY(90deg);
+        }
+        60% {
+            transform: scale(1,1) rotateY(0deg);
+        }
+        70% {
+            transform: scale(0.5,0.5);
+        }
+        80% {
+            transform: scale(0.2,0.2);
+        }
+        90% {
+            transform: scale(0,0);
+            visibility: hidden;
+        }
+        100% {
+            visibility: hidden;
+            transform:scale(1,1) ;
+        }
+    }
+    @keyframes te {
+        0% {
+            visibility: hidden;
+            transform:scale(1,1) ;
+        }
+        100% {
+            visibility: visible;
+            transform: scale(1,1);
+        }
+    }
+    #grade1 {
+        width:100px;
+        height:30px;
+        background-color: rgba(0,0,233,0.5);
+        line-height: 30px;
+        color: red;
+    }
+    #grade2 {
+        width:100px;
+        height:30px;
+        background-color: rgba(0,0,233,0.5);
+        line-height: 30px;
+        color: red;
+    }
+    #grade1 span {
+        color: red;
+        text-align: center;
+        line-height: 30px;
+    }
+    #grade2 span {
+        color: red;
+        text-align: center;
+        line-height: 30px;
+    }
+    #doc {
+        width:100%;
+        height:100%;
+        background-color: rgba(2,2,2,0.4);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+    #pox {
+        text-align: center;
+        position: relative;
+        width:600px;
+        height:100px;
+        background-color: crimson;
+    }
+    #pox span {
+        font-size: 24px;
+        color: #000;
+    }
+    #close {
+        width:50px;
+        height:15px;
+        line-height:15px;
+        text-align: center;
+        background-color: #1d7ad9;
+        position: absolute;
+        bottom: 10px;
+        right:10px;
+    }
+    #sure {
+        width:50px;
+        height:15px;
+        line-height:15px;
+        text-align: center;
+        background-color: #1d7ad9;
+        position: absolute;
+        bottom: 10px;
+        left:10px;
+    }
+    #nu {
+        width:100%;
+        height:100%;
+        background-image: url("img/界面.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        position: absolute;
+        transition: height 2s;
+        z-index: 499;
+    }
+    #yu {
+        width:100px;
+        height:50px;
+        background-color: gray;
+        text-align: center;
+        line-height: 50px;
+        margin-bottom: 300px;
+        font-size: large;
+        border-radius: 10px 10px;
+        box-shadow: 10px 10px black ;
+        cursor: pointer;
+    }
+</style>
+<body>
+<div id="nu">
+    <div id="yu" onclick="gu()">开始游戏</div>
+</div>
+<div id="box">
+    <div id="box1">
+    </div>            <!-- 电脑牌区 -->
+    <div id="box2">
+        <div id="grade1">电脑分数:<span>0</span></div>
+        <div id="st" onclick="sr()">
+            <img src="img/开始.png" alt="">
+        </div>
+        <!-- 发牌位置 -->
+        <div id="en" onclick="ed()">
+            <img src="img/结束.png" alt="">
+        </div>
+        <div id="grade2">玩家分数:<span>0</span></div>
+    </div>
+    <div id="box3">
+    </div>   <!-- 自己牌区 -->
+</div>
+<div id="doc">
+    <div id="pox">
+        <span></span>
+        <button id="close" onclick="clo()">关闭</button>
+        <button id="sure" onclick="sur()">确认</button>
+    </div>
+</div>
+<div id=""></div>
+<script>
+    function gu() {
+        nu.style.height = 0+'px';
+    }
+    var tem = null;
+    var tim = 0;
+    function da() {
+        yu.style.width = 120+'px';
+        yu.style.height = 70 +'px';
+        yu.style.color = 'red'
+        yu.style.fontSize = 'larger'
+        yu.style.lineHeight = 70 +'px';
+    }
+    function xiao() {
+        yu.style.width = 100+'px';
+        yu.style.height = 50 +'px';
+        yu.style.color = 'black'
+        yu.style.fontSize = 'large'
+        yu.style.lineHeight = 50 +'px';
+    }
+    function ri() {
+        tim+=1;
+        if(tim%2==0) {
+            da();
+        }
+        else {
+            xiao();
+        }
+    }
+    tem = setInterval(ri,300);
+    var grade1 = document.getElementById('grade1');
+    var grade2 = document.getElementById('grade2');
+    var doc = document.getElementById('doc');
+    var pox = document.getElementById('pox');
+    var close = document.getElementById('close');
+    var arr = [];
+    for(var i =0;i<22;i++) {
+        var obj = {};
+        if(i<=0) {
+            obj.img='img/timg.png';
+            obj.imgs='img/旅行者.png';
+            obj.value = '6';
+        }
+        if(i<=2 && i>0) {
+            obj.img='img/timg.png';
+            obj.imgs='img/迪卢克.png';
+            obj.value = '5';
+        }
+        if(i<=5 && i>2) {
+            obj.img='img/timg.png';
+            obj.imgs='img/魈.png';
+            obj.value = '4';
+        }
+        if(i<=9 && i>5) {
+            obj.img='img/timg.png';
+            obj.imgs='img/雷泽.png';
+            obj.value = '3';
+        }
+        if(i<=14 && i>9) {
+            obj.img='img/timg.png';
+            obj.imgs='img/班尼特.png';
+            obj.value = '2';
+        }
+        if(i<=21 && i>14) {
+            obj.img='img/timg.png';
+            obj.imgs='img/砂糖.png';
+            obj.value = '1';
+        }
+        arr.push(obj);
+    }
+    var temp;
+    for(var j =arr.length-1;j>=0;j--) {
+        var ran = Math.floor(Math.random()*j);
+        temp=arr[ran];
+        arr[ran]=arr[j];
+        arr[j]=temp;
+    }
+    var st = document.getElementById('st');
+    for(var u = 0;u<arr.length;u++) {
+        var come = document.createElement('div');
+        var com = document.createElement('div');
+        var coe = document.createElement('div');
+        var img1 = document.createElement('img');
+        img1.src = arr[u].img;
+        var img2 = document.createElement('img');
+        img2.src = arr[u].imgs;
+        com.appendChild(img1);
+        coe.appendChild(img2);
+        com.className='com';
+        coe.className='coe';
+        come.className='come';
+        come.appendChild(com);
+        come.appendChild(coe);
+        // coe.style.transform='rotateY(180deg)';
+        come.value=arr[u].value;
+        come.setAttribute('onclick','rever(this)');
+        box2.insertBefore(come,st);
+    }
+    function refresh() {
+        var br = JSON.parse(JSON.stringify(arr));
+        var come = document.getElementsByClassName('come');
+        var com = document.getElementsByClassName('com');
+        var coe = document.getElementsByClassName('coe');
+        var temp;
+        for(var r =br.length-1;r>=0;r--) {
+            var tan = Math.floor(Math.random()*r);
+            temp=br[tan];
+            br[tan]=br[r];
+            br[r]=temp;
+        }
+        for(var u = 0;u<br.length;u++) {
+            com[u].children[0].src = br[u].img;
+            coe[u].children[0].src = br[u].imgs;
+            come[u].value = br[u].value;
+            come[u].log = 'true';
+            come[u].fog = 'true'
+            come[u].style.animation = 'te 1s linear forwards';
+        }
+    }
+    var sty = true;
+    function sr() {
+        if(sty == true) {
+            var arr2 = [0,1,2,3,4,5,6,7,8,9,10];
+            var a=0;
+            var b=0;
+            var arr1=[];    //用来判断牌随机数是否和之前的重复
+            refresh();
+            var _this = this;
+            var come = document.getElementsByClassName('come');
+            console.log(come);
+            var top1 = 100;
+            var left = 370;
+            var top2 = 700;
+            for(var q = 0;q<2;q++) {
+                if(q==0) {
+                    for(var e= 0; e<11;e++) {
+                        come[e].style.top = top1+'px';
+                        come[e].style.left=left+'px';
+                        left+=110;
+                    }
+                }
+                if(q==1) {
+                    left=370;
+                    for(var e= 11; e<22;e++) {
+                        come[e].style.top = top2+'px';
+                        come[e].style.left=left+'px';
+                        left+=110;
+                    }
+                }
+            }
+            for(var r = 11;r<22;r++) {
+                come[r].style.animation = 'reve 2s linear 2s forwards';
+                come[r].fog = 'false';
+            }
+            this.rever = function (_this) {
+                var c = 0;  //用来判断所有的牌是否都被翻过来
+                if(_this.log=='true') {
+                    var ra = Math.floor(Math.random()*arr2.length);
+                    var re = arr2[ra];
+                        arr1[arr1.length]=re;
+                        come[re].style.animation='rev 4s linear 0.2s forwards';
+                        come[re].fog = 'true';
+                        come[re].log = 'false';
+                        if(_this.value>come[re].value) {
+                            //alert('您赢了！！！');
+                            a+=1;
+                            grade2.children[0].innerHTML=a;
+                        }
+                        else {
+                            //alert('您输了！！！');
+                            b+=1;
+                            grade1.children[0].innerHTML=b;
+                        }
+                        _this.style.animation = 'rei 1.8s linear 1.6s both'
+                        _this.log ='false';
+                        _this.fog ='true';
+                    arr2.splice(ra,1);
+                }
+                for(var y = 0;y<come.length;y++) {
+                    if(come[y].fog == 'true') {
+                        c+=1;
+                    }
+                }
+                if(c==22) {
+                    if(Number(grade1.children[0].innerHTML)>Number(grade2.children[0].innerHTML)) {
+                        doc.style.display = 'flex';
+                        pox.children[0].innerHTML='您这回合已经输了！！！'
+                    }
+                    if(Number(grade1.children[0].innerHTML)<Number(grade2.children[0].innerHTML)) {
+                        doc.style.display = 'flex';
+                        pox.children[0].innerHTML='您这回合已经赢了！！！'
+                    }
+                    if(Number(grade1.children[0].innerHTML)==Number(grade2.children[0].innerHTML)) {
+                        doc.style.display = 'flex';
+                        pox.children[0].innerHTML='平局！！！'
+                    }
+                }
+            }
+            sty = false;
+        }
+        else {
+            alert('请不要重复刷牌！！！');
+        }
+
+    }
+    function ed() {
+        var c = 0;
+        var comes = document.getElementsByClassName('come');
+        for(var y = 0;y<come.length;y++) {
+            if(come[y].fog == 'true') {
+                c+=1;
+            }
+        }
+        if(c==22) {
+            if(Number(grade1.children[0].innerHTML)>Number(grade2.children[0].innerHTML)) {
+                doc.style.display = 'flex';
+                pox.children[0].innerHTML='您这回合已经输了！！！'
+            }
+            if(Number(grade1.children[0].innerHTML)<Number(grade2.children[0].innerHTML)) {
+                doc.style.display = 'flex';
+                pox.children[0].innerHTML='您这回合已经赢了！！！'
+            }
+            if(Number(grade1.children[0].innerHTML)==Number(grade2.children[0].innerHTML)) {
+                doc.style.display = 'flex';
+                pox.children[0].innerHTML='平局！！！'
+            }
+        }
+        for(var i = 0;i<comes.length;i++) {
+            if(comes[i].fog == 'false') {
+                doc.style.display = 'flex';
+                pox.children[0].innerHTML='牌还没有翻完，确认结束游戏吗？';
+            }
+        }
+    }
+    function clo() {
+        doc.style.display = 'none';
+        var comes = document.getElementsByClassName('come');
+        var c = 0;
+        for(var j = 0;j<comes.length;j++) {
+            if(comes[j].fog=='false') {
+                c+=1;
+            }
+        }
+        if(c==0) {
+            for(var i = 0;i<comes.length;i++) {
+                if(comes[i].fog=='false') {
+                    comes[i].style.animation='revt 1s linear forwards';
+                }
+                comes[i].log = 'true';
+                comes[i].fog = 'true';
+                comes[i].style.animation = 'te 1s linear forwards';
+                comes[i].style.left=900+'px';
+                comes[i].style.top=400+'px';
+            }
+            grade1.children[0].innerHTML = 0;
+            grade2.children[0].innerHTML = 0;
+            sty = true;
+        }
+        else {
+            doc.style.display='none';
+        }
+    }
+    function sur() {
+        var comes = document.getElementsByClassName('come');
+        var r =0;
+        for(var i = 0;i<comes.length;i++) {
+            if(comes[i].fog == 'false') {
+                r+=1;
+            }
+            }
+            if(r==0 || pox.children[0].innerHTML=='您这回合已经输了！！！' || pox.children[0].innerHTML=='您这回合已经赢了！！！' || pox.children[0].innerHTML=='平局！！！' || pox.children[0].innerHTML=='因为您这回合提前结束游戏,您已经输了！！！') {
+                doc.style.display = 'none';
+                for(var i = 0;i<comes.length;i++) {
+                    if(comes[i].fog=='false') {
+                        comes[i].style.animation='revt 1s linear forwards';
+                    }
+                    comes[i].log = 'true';
+                    comes[i].fog = 'true';
+                    comes[i].style.animation = 'te 1s linear forwards';
+                    comes[i].style.left=900+'px';
+                    comes[i].style.top=400+'px';
+                }
+                grade1.children[0].innerHTML = 0;
+                grade2.children[0].innerHTML = 0;
+                sty = true;
+            }
+            else {
+                    doc.style.display = 'flex';
+                    pox.children[0].innerHTML='因为您这回合提前结束游戏,您已经输了！！！'
+            }
+
+        }
+</script>
+</body>
+</html>
